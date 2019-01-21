@@ -12,6 +12,7 @@ import android.text.Spannable;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -160,8 +161,13 @@ public class FlowTextView extends RelativeLayout {
                     do {
                         chunkSize = getChunk(thisBlock, maxWidth);
                         int thisCharOffset = charOffsetEnd + chunkSize;
+                        //Log.d("FlowTextView", "thisBlock: " + thisBlock + " chunkSize: " + chunkSize);
 
-                        if (chunkSize > 1) {
+                        if(chunkSize > thisBlock.length()){
+                            chunkSize = thisBlock.length();
+                        }
+
+                        if (chunkSize >= 1) {
                             thisLineStr = thisBlock.substring(0, chunkSize);
                         } else {
                             thisLineStr = "";
